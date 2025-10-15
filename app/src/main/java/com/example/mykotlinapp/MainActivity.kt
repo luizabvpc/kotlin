@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
     lateinit var btnSubtraction : Button
     lateinit var btnMultiply : Button
     lateinit var btnDivision : Button
+    lateinit var btnSquare : Button
+    lateinit var btnClear : Button
     lateinit var  etA : EditText
     lateinit var etB : EditText
     lateinit var  resultTv : TextView
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         btnSubtraction = findViewById(R.id.btn_subtraction)
         btnMultiply = findViewById(R.id.btn_multiplication)
         btnDivision = findViewById(R.id.btn_division)
+        btnSquare = findViewById(R.id.btn_square)
+        btnClear = findViewById(R.id.btn_clear)
         etA = findViewById(R.id.et_a)
         etB = findViewById(R.id.et_b)
         resultTv = findViewById(R.id.result_tv)
@@ -37,12 +41,16 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         btnSubtraction.setOnClickListener(this)
         btnMultiply.setOnClickListener(this)
         btnDivision.setOnClickListener(this)
+        btnSquare.setOnClickListener (this)
+        btnClear.setOnClickListener (this)
+
 
     }
 
     override fun onClick(v: View?) {
-        var a = etA.toString().toDouble()
-        var b = etB.toString().toDouble()
+        val a = etA.text.toString().toDouble()
+        val b = etB.text.toString().toDouble()
+
         var result = 0.0
         when(v?.id){
             R.id.btn_add ->{
@@ -57,7 +65,15 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
             R.id.btn_division ->{
                 result = a/b
             }
+            R.id.btn_square -> {
+                result = Math.pow(a, b)
+            }
+            R.id.btn_clear -> {
+                etA.setText("");
+                etB.setText("");
+                resultTv.setText("Resultado:");
+            }
         }
-        resultTv.text = "Result is $result"
+        resultTv.text = "O Resultado é $result"
     }
 }
